@@ -4,11 +4,9 @@ class Program
 {
     static void Main()
     {
-        // Ask the user for their grade percentage
         Console.Write("Enter your grade percentage: ");
         int grade = int.Parse(Console.ReadLine());
 
-        // Determine the letter grade
         string letter;
 
         if (grade >= 90)
@@ -32,11 +30,10 @@ class Program
             letter = "F";
         }
 
-        // Determine the sign (+, -, or none)
         string sign = "";
         int lastDigit = grade % 10;
 
-        if (letter != "A" && letter != "F") // A+ doesn't exist, F has no sign
+        if (letter != "A" && letter != "F")
         {
             if (lastDigit >= 7)
             {
@@ -49,13 +46,11 @@ class Program
         }
         else if (letter == "A" && lastDigit < 3)
         {
-            sign = "-"; // Only A- exists
+            sign = "-";
         }
 
-        // Print the letter grade with the sign
         Console.WriteLine("Your letter grade is: " + letter + sign);
 
-        // Determine pass/fail
         if (grade >= 70)
         {
             Console.WriteLine("Congratulations! You passed the course.");
