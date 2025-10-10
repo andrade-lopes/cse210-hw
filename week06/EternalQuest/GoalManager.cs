@@ -61,7 +61,7 @@ public class GoalManager
         Console.WriteLine("\nGoals:");
         for (int i = 0; i < _goals.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {_goals[i]._shortName}"); // note: _shortName is protected but this class is same assembly - if needed change getter
+            Console.WriteLine($"{i + 1}. {_goals[i].ShortName}"); // note: _shortName is protected but this class is same assembly - if needed change getter
         }
     }
 
