@@ -14,9 +14,18 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
+        int prev = _amountCompleted;
         _amountCompleted++;
+
+        if (prev < _target && _amountCompleted >= _target)
+        {
+            // you just reached the goal -> return points + bonus
+            return _points + _bonus;
+        }
+
+        return _points;
     }
 
     public override bool IsComplete()
@@ -27,7 +36,7 @@ public class ChecklistGoal : Goal
     public override string GetDetailsString()
     {
         string checkbox = IsComplete() ? "[X]" : "[ ]";
-        return $"{checkbox} {_shortName} ({_description}) -- Currently completed {_amountCompleted}/{_target}";
+        return $"{checkbox} {_shortName} ({_description}) -- Completed {_amountCompleted}/{_target}";
     }
 
     public override string GetStringRepresentation()
