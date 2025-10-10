@@ -1,0 +1,4 @@
+0
+SimpleGoal:book mormon,Read this book,50,False
+EternalGoal:Eternal family,sealing in the temple,100
+ChecklistGoal:Goals list,Make a list of goals,40,0,1,5
