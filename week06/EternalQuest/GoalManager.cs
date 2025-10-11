@@ -168,10 +168,10 @@ public class GoalManager
         {
             using (StreamWriter outputFile = new StreamWriter(filename))
             {
-                // 1. Salvar a pontuação total (linha 1)
+                // 1. Save the total score (line 1)
                 outputFile.WriteLine(_score);
 
-                // 2. Salvar cada goal (uma linha por goal)
+                // 2. Save each goal (one line per goal)
                 foreach (Goal g in _goals)
                 {
                     outputFile.WriteLine(g.GetStringRepresentation());
@@ -209,7 +209,7 @@ public class GoalManager
 
             _goals.Clear();
 
-            // primeira linha = pontuação
+            // First line = score
             if (!int.TryParse(lines[0], out _score))
             {
                 Console.WriteLine("Invalid score in file; setting score to 0.");

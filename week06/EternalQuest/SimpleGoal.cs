@@ -10,6 +10,7 @@ public class SimpleGoal : Goal
         _isComplete = false;
     }
 
+    // Used when loading from file (includes completion state)
     public SimpleGoal(string name, string description, int points, bool isComplete)
         : base(name, description, points)
     {
@@ -23,7 +24,7 @@ public class SimpleGoal : Goal
             _isComplete = true;
             return _points;
         }
-        return 0;
+        return 0; // Already completed, no points awarded
     }
 
     public override bool IsComplete()
@@ -33,6 +34,7 @@ public class SimpleGoal : Goal
 
     public override string GetStringRepresentation()
     {
+        // Format: SimpleGoal:Name,Description,Points,IsComplete
         return $"SimpleGoal:{_shortName},{_description},{_points},{_isComplete}";
     }
 }

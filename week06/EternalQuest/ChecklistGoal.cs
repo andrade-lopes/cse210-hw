@@ -6,6 +6,7 @@ public class ChecklistGoal : Goal
     private int _target;
     private int _bonus;
 
+    // Regular constructor (used when creating a new goal from scratch)
     public ChecklistGoal(string name, string description, int points, int target, int bonus)
         : base(name, description, points)
     {
@@ -14,6 +15,7 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
+    // Constructor used when loading from file (includes saved progress)
     public ChecklistGoal(string name, string description, int points, int amountCompleted, int target, int bonus)
         : base(name, description, points)
     {
@@ -22,6 +24,7 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
+    // Records an event (progress). Returns earned points.
     public override int RecordEvent()
     {
         int prev = _amountCompleted;
@@ -29,10 +32,11 @@ public class ChecklistGoal : Goal
 
         if (prev < _target && _amountCompleted >= _target)
         {
-            // you just reached the goal -> return points + bonus
+            // Just completed the checklist goal → award points + bonus
             return _points + _bonus;
         }
 
+        // Otherwise, only return regular points
         return _points;
     }
 
@@ -49,6 +53,7 @@ public class ChecklistGoal : Goal
 
     public override string GetStringRepresentation()
     {
+        // Format: ChecklistGoal:Name,Description,Points,AmountCompleted,Target,Bonus
         return $"ChecklistGoal:{_shortName},{_description},{_points},{_amountCompleted},{_target},{_bonus}";
     }
 }
