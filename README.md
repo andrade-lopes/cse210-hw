@@ -1,5 +1,5 @@
 # cse210-ww-student-template
-Student: Jose Antonio Andrade Lopes
+Student: Jose Antonio Lopes
 
 This is the starter code for students in the worldwide content version of CSE 210.
 
