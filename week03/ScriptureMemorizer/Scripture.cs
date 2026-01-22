@@ -1,64 +1,64 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-public class Scripture
+namespace ScriptureMemorizer
 {
-    private Reference _reference;
-    private List<Word> _words;
-
-    // Constructor
-    public Scripture(Reference reference, string text)
+    // Represents a scripture made of a reference and a list of words
+    public class Scripture
     {
-        _reference = reference;
-        _words = new List<Word>();
+        private Reference _reference;
+        private List<Word> _words;
+        private Random _random = new Random();
 
-        string[] parts = text.Split(' ');
-
-        foreach (string part in parts)
+        public Scripture(Reference reference, string text)
         {
-            _words.Add(new Word(part));
-        }
-    }
+            _reference = reference;
+            _words = new List<Word>();
 
-    public void HideRandomWords(int numberToHide)
-    {
-        Random random = new Random();
-        int hiddenCount = 0;
+            string[] tokens = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-        while (hiddenCount < numberToHide && !IsCompletelyHidden())
-        {
-            int index = random.Next(_words.Count);
-
-            if (!_words[index].IsHidden())
+            foreach (string token in tokens)
             {
-                _words[index].Hide();
-                hiddenCount++;
-            }
-        }
-    }
-
-    public string GetDisplayText()
-    {
-        List<string> displayWords = new List<string>();
-
-        foreach (Word word in _words)
-        {
-            displayWords.Add(word.GetDisplayText());
-        }
-
-        return $"{_reference.GetDisplayText()}\n\n{string.Join(" ", displayWords)}";
-    }
-
-    public bool IsCompletelyHidden()
-    {
-        foreach (Word word in _words)
-        {
-            if (!word.IsHidden())
-            {
-                return false;
+                _words.Add(new Word(token));
             }
         }
 
-        return true;
+        // Returns the full scripture text with hidden words
+        public string GetDisplayText()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(_reference.ToString());
+            sb.Append(" - ");
+
+            sb.Append(string.Join(" ", _words.Select(w => w.GetDisplayText())));
+
+            return sb.ToString();
+        }
+
+        // Returns true if all words with letters are hidden
+        public bool AllWordsHidden()
+        {
+            return _words
+                .Where(w => w.HasLetters)
+                .All(w => w.IsHidden);
+        }
+
+        // Hides a random set of visible words
+        public void HideRandomVisibleWords(int count)
+        {
+            List<Word> visibleWords = _words
+                .Where(w => w.HasLetters && !w.IsHidden)
+                .ToList();
+
+            for (int i = 0; i < count && visibleWords.Count > 0; i++)
+            {
+                int index = _random.Next(visibleWords.Count);
+                visibleWords[index].Hide();
+                visibleWords.RemoveAt(index);
+            }
+        }
     }
 }

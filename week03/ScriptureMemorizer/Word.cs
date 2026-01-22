@@ -1,39 +1,46 @@
-public class Word
+using System.Linq;
+using System.Text;
+
+namespace ScriptureMemorizer
 {
-    private string _text;
-    private bool _isHidden;
-
-    // Constructor
-    public Word(string text)
+    // Represents a single word (or token) in the scripture text
+    public class Word
     {
-        _text = text;
-        _isHidden = false; // Visible by default
-    }
+        private readonly string _originalText;
+        private bool _isHidden;
 
-    public void Hide()
-    {
-        _isHidden = true;
-    }
-
-    public void Show()
-    {
-        _isHidden = false;
-    }
-
-    public bool IsHidden()
-    {
-        return _isHidden;
-    }
-
-    public string GetDisplayText()
-    {
-        if (_isHidden)
+        public Word(string text)
         {
-            return new string('_', _text.Length);
+            _originalText = text ?? string.Empty;
+            _isHidden = false;
         }
-        else
+
+        public bool IsHidden => _isHidden;
+
+        // Checks if this word contains any letters
+        public bool HasLetters => _originalText.Any(char.IsLetter);
+
+        // Hides this word by replacing letters with underscores
+        public void Hide()
         {
-            return _text;
+            if (HasLetters)
+                _isHidden = true;
+        }
+
+        // Returns the text to display (hidden or original)
+        public string GetDisplayText()
+        {
+            if (!_isHidden)
+                return _originalText;
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in _originalText)
+            {
+                sb.Append(char.IsLetter(c) ? '_' : c);
+            }
+
+            return sb.ToString();
         }
     }
 }

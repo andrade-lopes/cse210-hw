@@ -1,37 +1,42 @@
-public class Reference
+using System;
+
+namespace ScriptureMemorizer
 {
-    private string _book;
-    private int _chapter;
-    private int _verse;
-    private int _endVerse;
-
-    // Constructor for single verse
-    public Reference(string book, int chapter, int verse)
+    // Represents a scripture reference like "John 3:16" or "Proverbs 3:5-6"
+    public class Reference
     {
-        _book = book;
-        _chapter = chapter;
-        _verse = verse;
-        _endVerse = verse;
-    }
+        public string Book { get; private set; }
+        public int Chapter { get; private set; }
+        public int VerseStart { get; private set; }
+        public int? VerseEnd { get; private set; }
 
-    // Constructor for verse range
-    public Reference(string book, int chapter, int startVerse, int endVerse)
-    {
-        _book = book;
-        _chapter = chapter;
-        _verse = startVerse;
-        _endVerse = endVerse;
-    }
-
-    public string GetDisplayText()
-    {
-        if (_verse == _endVerse)
+        // Constructor for a single verse
+        public Reference(string book, int chapter, int verse)
         {
-            return $"{_book} {_chapter}:{_verse}";
+            Book = book;
+            Chapter = chapter;
+            VerseStart = verse;
+            VerseEnd = null;
         }
-        else
+
+        // Constructor for a verse range
+        public Reference(string book, int chapter, int verseStart, int verseEnd)
         {
-            return $"{_book} {_chapter}:{_verse}-{_endVerse}";
+            if (verseEnd < verseStart)
+                throw new ArgumentException("Verse end must be greater than or equal to verse start.");
+
+            Book = book;
+            Chapter = chapter;
+            VerseStart = verseStart;
+            VerseEnd = verseEnd;
+        }
+
+        public override string ToString()
+        {
+            if (VerseEnd.HasValue)
+                return $"{Book} {Chapter}:{VerseStart}-{VerseEnd.Value}";
+            else
+                return $"{Book} {Chapter}:{VerseStart}";
         }
     }
 }
