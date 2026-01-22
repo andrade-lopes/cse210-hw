@@ -9,7 +9,6 @@ namespace ScriptureMemorizer
         {
             Console.WriteLine();
             Console.WriteLine("Hello World! This is the ScriptureMemorizer Project.");
-            Console.WriteLine();
 
             // Create a small library of scriptures
             List<Scripture> scriptures = new List<Scripture>
