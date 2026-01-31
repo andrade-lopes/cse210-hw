@@ -14,8 +14,8 @@ class Program
             "https://www.youtube.com/watch?v=r3CExhZgZV8&list=PLZPZq0r_RZOPNy28FDBys3GVP2LiaIyP_", 351000, 9300);
 
         YouTubeVideo video2 = new YouTubeVideo(
-            "OOP in C#", 900, "Programming School",
-            "https://youtube.com/video2", 2500, 500);
+            "Object Oriented Programming In C#", 1153, "Simplilearn",
+            "https://www.youtube.com/watch?v=iA0XZwFqqKI", 170000, 2000);
 
         playlist.AddVideo(video1);
         playlist.AddVideo(video2);
