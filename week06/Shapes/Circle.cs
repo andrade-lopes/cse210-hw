@@ -13,4 +13,10 @@ public class Circle : Shape
     {
         return Math.PI * _radius * _radius;
     }
+
+    // New method
+    public override string GetName()
+    {
+        return "Circle";
+    }
 }

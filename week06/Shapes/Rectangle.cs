@@ -15,4 +15,10 @@ public class Rectangle : Shape
     {
         return _length * _width;
     }
+
+    // New method
+    public override string GetName()
+    {
+        return "Rectangle";
+    }
 }

@@ -13,4 +13,10 @@ public class Square : Shape
     {
         return _side * _side;
     }
+
+    // New method
+    public override string GetName()
+    {
+        return "Square";
+    }
 }

@@ -24,4 +24,10 @@ public class Shape
     {
         return 0;
     }
+
+    // New method (polimorphism)
+    public virtual string GetName()
+    {
+        return "Shape";
+    }
 }
