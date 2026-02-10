@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
@@ -11,7 +12,8 @@ class Program
 
         // Add different shapes
         shapes.Add(new Square("Red", 4));
-
+        shapes.Add(new Rectangle("Blue", 5, 3));
+        shapes.Add(new Circle("Green", 2.5));
 
         // Iterate and display the areas and colors
         foreach (Shape shape in shapes)
