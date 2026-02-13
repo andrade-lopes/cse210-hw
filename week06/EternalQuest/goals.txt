@@ -1,0 +1,2 @@
+0
+SimpleGoal:prayer,To pray every day.,10,False
